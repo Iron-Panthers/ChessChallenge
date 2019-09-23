@@ -14,15 +14,18 @@ public class Rook extends Piece {
         int initialY = start.getY();
         int finalX = end.getX();
         int finalY = end.getY();
-        int 
+        int changeInX = finalX - initialX;
+        int changeInY = finalY - initialY;
 
-        if((finalX - initialX) * (finalY - initialY) == 0){
-
+        if(((changeInX == 0) && (changeInY != 0)) || ((changeInX == 0) && (changeInY != 0))){
+            if(!end.isOccupied()){
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
         }
-
-
-
-        return true;
     }
 
 
