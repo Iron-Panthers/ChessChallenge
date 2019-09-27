@@ -1,6 +1,6 @@
 package app.pieces;
 
-import app.board.Square;
+import app.board.*;
 
 public abstract class Piece{
     private int side;
@@ -17,9 +17,7 @@ public abstract class Piece{
     }
 
     public boolean isDead(){
-        if(isDead == true)
-            return true;
-        return false;
+        return isDead == true;
     }
 
     public void killPiece(){
@@ -27,4 +25,6 @@ public abstract class Piece{
     }
 
     public abstract boolean isValidMove(Square start, Square end);
+    public abstract String getName();
+    // public abstract boolean canReachSpot(Board board);
 }

@@ -1,5 +1,35 @@
 package app.pieces;
 
-public class Bishop{
+import app.board.Square;
+
+public class Bishop extends Piece {
+
+    public Bishop(int side) {
+        super(side);
+    }
+
+    @Override
+    public boolean isValidMove(Square start, Square end) {
+        int initialX = start.getX();
+        int initialY = start.getY();
+        int finalX = end.getX();
+        int finalY = end.getY();
+        int changeInX = finalX - initialX;
+        int changeInY = finalY - initialY;
+
+        if ((changeInX == changeInY) && start.getSide() != end.getSide()){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getName() {
+        if(getSide() == 1){
+        return "Wk";
+        } else {
+            return "Bk";
+        }
+    }
 
 }

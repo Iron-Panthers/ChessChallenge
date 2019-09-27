@@ -4,12 +4,18 @@ import app.pieces.Piece;
 
 public class Square{
     private int x, y;
-    Piece piece;
+    private Piece piece;
+    private int side;
 
     public Square(int x, int y, Piece piece){
         this.x = x;
         this.y = y;
         this.piece = piece;
+        side = piece.getSide();
+    }
+
+    public int getSide(){
+        return side;
     }
 
     public int getX(){

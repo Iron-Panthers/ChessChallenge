@@ -1,10 +1,10 @@
 package app.pieces;
 
-import app.board.Square;
+import app.board.*;
 
 public class Rook extends Piece {
 
-    Rook(int side) {
+    public Rook(int side) {
         super(side);
     }
 
@@ -18,16 +18,26 @@ public class Rook extends Piece {
         int changeInY = finalY - initialY;
 
         if(((changeInX == 0) && (changeInY != 0)) || ((changeInX == 0) && (changeInY != 0))){
-            if(!end.isOccupied()){
+            if(start.getSide() != end.getSide()){
                 return true;
-            } else {
-                return false;
+            } else{
+                return true;
             }
         } else {
-            return false;
+            return true;
         }
     }
 
+    @Override
+    public String getName() {
+        if(getSide() == 1){
+        return "Wr";
+        } else {
+            return "Br";
+        }
+    }
 
+    
+    
 
 }
