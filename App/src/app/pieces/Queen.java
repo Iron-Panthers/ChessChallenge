@@ -9,7 +9,7 @@ public class Queen extends Piece {
     }
 
     @Override
-    public boolean isValidMove(Square start, Square end) {
+    public boolean isValidMove(Square[][] board, Square start, Square end) {
         int initialX = start.getX();
         int initialY = start.getY();
         int finalX = end.getX();

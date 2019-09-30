@@ -1,16 +1,15 @@
 package app.pieces;
 
-import app.board.Square;
+import app.board.*;
 
 public class Pawn extends Piece {
-
+    
     Pawn(int side) {
         super(side);
     }
 
-    //TODO finish pawn move exception handling
     @Override
-    public boolean isValidMove(Square start, Square end) {
+    public boolean isValidMove(Square[][] board, Square start, Square end) {
         if(start.getSide() == end.getSide()){
             return false;
             //handles pawn moving from home row
@@ -24,8 +23,11 @@ public class Pawn extends Piece {
 
     @Override
     public String getName() {
-        
-        return null;
+        if(getSide() == 0){
+            return "Wp";
+        } else {
+            return "Bp";
+        }
     }
 
 }

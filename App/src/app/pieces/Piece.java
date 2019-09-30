@@ -24,7 +24,7 @@ public abstract class Piece{
         this.isDead = true;
     }
 
-    public abstract boolean isValidMove(Square start, Square end);
+    public abstract boolean isValidMove(Square[][] board, Square start, Square end);
     public abstract String getName();
     // public abstract boolean canReachSpot(Board board);
 }

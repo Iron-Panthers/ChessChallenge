@@ -18,12 +18,6 @@ public class Board{
         board[0][6] = new Square(0, 0, new Knight(1));
         board[0][7] = new Square(0, 0, new Rook(1));
 
-
-
-
-
-
-
         return board;
     }
 }
