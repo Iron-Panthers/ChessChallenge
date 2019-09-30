@@ -4,7 +4,7 @@ import app.board.*;
 
 public class Pawn extends Piece {
     
-    Pawn(int side) {
+    public Pawn(int side) {
         super(side);
     }
 

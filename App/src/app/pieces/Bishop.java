@@ -17,9 +17,10 @@ public class Bishop extends Piece {
         int changeInX = finalX - initialX;
         int changeInY = finalY - initialY;
 
-        if ((changeInX == changeInY) && start.getSide() != end.getSide()){
+        if(start.getSide() != end.getSide() && changeInX == changeInY){
             return true;
         }
+
         return false;
     }
 

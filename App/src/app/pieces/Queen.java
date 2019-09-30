@@ -4,7 +4,7 @@ import app.board.Square;
 
 public class Queen extends Piece {
 
-    Queen(int side) {
+    public Queen(int side) {
         super(side);
     }
 
