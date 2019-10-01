@@ -23,7 +23,7 @@ public abstract class Piece{
     public void killPiece(){
         this.isDead = true;
     }
-
+    
     public abstract boolean isValidMove(Square[][] board, Square start, Square end);
     public abstract String getName();
     // public abstract boolean canReachSpot(Board board);

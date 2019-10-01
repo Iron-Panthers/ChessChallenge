@@ -31,7 +31,7 @@ public class Square{
     }
 
     public boolean isOccupied(){
-        if(piece != null) {
+        if(piece.getSide() == -1) {
             return false;
         } else {
             return true;

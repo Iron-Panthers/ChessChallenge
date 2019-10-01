@@ -10,14 +10,27 @@ public class Pawn extends Piece {
 
     @Override
     public boolean isValidMove(Square[][] board, Square start, Square end) {
+        int initialX = start.getX();
+        int initialY = start.getY();
+        int finalX = end.getX();
+        int finalY = end.getY();
+        int changeInX = Math.abs(finalX - initialX);
+        int changeInY = Math.abs(finalY - initialY);
+
         if(start.getSide() == end.getSide()){
             return false;
-            //handles pawn moving from home row
-        } else if(start.getSide() == 0 && start.getY()
-         == 6 && Math.abs(start.getX()) - Math.abs(end.getX())
-         == 0 && (end.getY() == 5 || end.getY() == 4)){
-            return true;
-        } else
+        } else if (!end.isOccupied()){
+            //handles white pawn moving from home row
+            if((start.getSide() == 1) && (end.getY() - start.getY() == -2) && (changeInX == 0) && (start.getY() == 6) && (changeInY == 2)){ 
+                return true;
+            //handles black pawn moving from home row
+            } else if((start.getSide() == 0) && (end.getY() - start.getY() == 2) && (changeInX == 0) && (start.getY() == 1) && (changeInY == 2)){
+                return true; 
+            } 
+        //handles pawn killing a piece
+        } else if(end.isOccupied()){
+            
+        }
         return false;
     }
 

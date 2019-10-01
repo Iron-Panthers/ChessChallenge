@@ -8,6 +8,7 @@ public class Board{
     public Board(Square[][] board){
         this.board = initializeBoard();
     }
+    //TODO figure out whether a parameter is needed below
     public Square[][] initializeBoard(){
         //black home row
         board[0][0] = new Square(0, 0, new Rook(1));
@@ -38,7 +39,7 @@ public class Board{
         for(int j = 0; j < 8; j++){
             board[6][j] = new Square(0, j, new Pawn(0));
         }
-
         return board;
     }
 }
+

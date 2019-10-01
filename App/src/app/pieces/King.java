@@ -16,7 +16,7 @@ public class King extends Piece {
         int finalY = end.getY();
         int changeInX = finalX - initialX;
         int changeInY = finalY - initialY;
-        if(changeInX + changeInY == 1){
+        if((changeInX + changeInY == 1) || (Math.abs(changeInX) + Math.abs(changeInY) == 2)){
             return true;
         }
         return false;
