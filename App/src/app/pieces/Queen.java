@@ -16,6 +16,7 @@ public class Queen extends Piece {
         int finalY = end.getY();
         int changeInX = finalX - initialX;
         int changeInY = finalY - initialY;
+        
         if(start.getSide() != end.getSide()){
             if((changeInX == 0) && (changeInY != 0) || ((changeInX == 0) && (changeInY != 0))){
                 return true;
