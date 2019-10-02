@@ -22,7 +22,7 @@ public class Board{
 
         //white home row
         board[7][0] = new Square(0, 0, new Rook(1));
-        board[7][7] = new Square(0, 1, new Knight(1));
+        board[7][1] = new Square(0, 1, new Knight(1));
         board[7][2] = new Square(0, 2, new Bishop(1));
         board[7][3] = new Square(0, 3, new Queen(1));
         board[7][4] = new Square(0, 4, new King(1));   
@@ -32,12 +32,19 @@ public class Board{
 
         //black pawns
         for(int j = 0; j < 8; j++){
-            board[1][j] = new Square(0, j, new Pawn(1));
+            board[1][j] = new Square(1, j, new Pawn(1));
         }
 
         //white pawns
         for(int j = 0; j < 8; j++){
-            board[6][j] = new Square(0, j, new Pawn(0));
+            board[6][j] = new Square(6, j, new Pawn(0));
+        }
+
+        //blank pieces
+        for(int i = 2; i < 6; i++){
+            for(int j = 0; j < 8; j++){
+                board[i][j] = new Square(i, j, new Blank(-1));
+            }
         }
         return board;
     }
@@ -88,20 +95,22 @@ public class Board{
 
     public void drawBoard(Square[][] board){
         System.out.println();
-        for(int i = 0; i < 8; i++){
-            System.out.print("____");
-        }
+        for(int i = 0; i < 8; i++)
+            System.out.print("_____");
 
         for(int row = 0; row < board.length; row++){
             System.out.println();
-            for(int col = 0; col < board[row].length; col++){
-                if(board[row][col].getPiece().getSide() == -1){
-                    System.out.print("|  |");
-                } else {
-                System.out.print("|" + board[row][col].getPiece().getName() + "|");
-                }
+            System.out.print("| ");
+            for(int col = 0; col < board[0].length; col++){
+                System.out.print(board[row][col].getPiece().getName() + " | ");
             }
         }
+
+        System.out.println();
+        System.out.print("-");
+        for(int i = 0; i < 8; i++)
+            System.out.print("_____");
+        System.out.println();
         
     }
 }
