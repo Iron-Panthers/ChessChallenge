@@ -54,14 +54,14 @@ public class Board{
         board[0][7] = new Square(0, 7, new Rook(1));
 
         //white home row
-        board[7][0] = new Square(0, 0, new Rook(1));
-        board[7][7] = new Square(0, 1, new Knight(1));
-        board[7][2] = new Square(0, 2, new Bishop(1));
-        board[7][3] = new Square(0, 3, new Queen(1));
-        board[7][4] = new Square(0, 4, new King(1));   
-        board[7][5] = new Square(0, 5, new Bishop(1));
-        board[7][6] = new Square(0, 6, new Knight(1)); 
-        board[7][7] = new Square(0, 7, new Rook(1));
+        board[7][0] = new Square(7, 0, new Rook(1));
+        board[7][7] = new Square(7, 1, new Knight(1));
+        board[7][2] = new Square(7, 2, new Bishop(1));
+        board[7][3] = new Square(7, 3, new Queen(1));
+        board[7][4] = new Square(7, 4, new King(1));   
+        board[7][5] = new Square(7, 5, new Bishop(1));
+        board[7][6] = new Square(7, 6, new Knight(1)); 
+        board[7][7] = new Square(7, 7, new Rook(1));
 
         //black pawns
         for(int j = 0; j < 8; j++){
@@ -72,18 +72,37 @@ public class Board{
         for(int j = 0; j < 8; j++){
             board[6][j] = new Square(0, j, new Pawn(0));
         }
+
+        //blank pieces
+        for(int i = 2; i < 6; i++){
+            for(int j = 0; j < 8; j++){
+                board[i][j] = new Square(i, j, new Blank(-1));
+            }
+        }
         return board;
     }
-
-    //TODO check if this is needed
+    
     public Square[][] getBoard(){
         return board;
     }
 
-    public void drawBoard(){
-        Square[][] board = initializeBoard();
+    public void drawBoard(Square[][] board){
+        System.out.println();
+        for(int i = 0; i < 8; i++){
+            System.out.print("____");
+        }
 
-        System.out.println("| " + board[0][0].getPiece().getName());
+        for(int row = 0; row < board.length; row++){
+            System.out.println();
+            for(int col = 0; col < board[row].length; col++){
+                if(board[row][col].getPiece().getSide() == -1){
+                    System.out.print("|  |");
+                } else {
+                System.out.print("|" + board[row][col].getPiece().getName() + "|");
+                }
+            }
+        }
+        
     }
 }
 

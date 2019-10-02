@@ -8,7 +8,6 @@ public class App {
         Square[][] gameBoard = new Square[8][8];
         Board board = new Board(gameBoard);
         gameBoard = board.initializeBoard();
-        board.drawBoard();
-        
+        board.drawBoard(gameBoard);
     }
 }
