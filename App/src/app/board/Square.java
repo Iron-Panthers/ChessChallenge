@@ -44,12 +44,15 @@ public class Square{
     public void setPiece(Piece piece){
         this.piece = piece;
     }
-
+    
+    //doesn't validate anything
     public void move(Player player, Square start, Square end){
         if(player.getPlayerSide() == start.getSide()){
             end.setPiece(start.getPiece());
             start.killPiece(start);
         }
+
+        
     }
 
     public void killPiece(Square square){

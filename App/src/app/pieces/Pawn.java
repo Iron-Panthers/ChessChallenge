@@ -42,7 +42,7 @@ public class Pawn extends Piece {
 
     @Override
     public String getName() {
-        if(getSide() == 0){
+        if(getSide() == 1){
             return "Wp";
         } else {
             return "Bp";

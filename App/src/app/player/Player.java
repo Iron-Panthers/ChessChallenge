@@ -6,6 +6,7 @@ public class Player{
 
     public Player(int side){
         this.side = side;
+        hasGone = false;
     }
 
     public int getPlayerSide(){
@@ -17,9 +18,13 @@ public class Player{
             return "Player 1";
         }
         return "Player 2";
-    }
+    }       
 
     public boolean hasGone(Player player){
         return hasGone;
+    }
+
+    public void setToGone(){
+        hasGone = true;
     }
 }
