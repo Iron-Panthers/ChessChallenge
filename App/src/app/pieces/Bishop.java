@@ -18,7 +18,7 @@ public class Bishop extends Piece {
         int changeInY = finalY - initialY;
 
         if(start.getSide() != end.getSide() && changeInX == changeInY && changeInX * changeInY != 0){
-            for(int i = 1; i < changeInX; i++){
+            for(int i = 1; i < changeInX - 1; i++){
                 if(board[(changeInX + (changeInX/changeInX)) + i][(changeInY + (changeInY/changeInY)) + i].isOccupied()) {
                     return false;
                 }
@@ -32,9 +32,9 @@ public class Bishop extends Piece {
     @Override
     public String getName() {
         if(getSide() == 1){
-        return "Wk";
+        return "Wb";
         } else {
-            return "Bk";
+            return "Bb";
         }
     }
 

@@ -32,10 +32,10 @@ public class Queen extends Piece {
 
     @Override
     public String getName() {
-        if(getSide() == 0){
+        if(getSide() == 1){
             return "WQ";
         } else {
-            return "WK";
+            return "BQ";
         }
     }
 }

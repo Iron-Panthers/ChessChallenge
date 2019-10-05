@@ -24,7 +24,7 @@ public class King extends Piece {
 
     @Override
     public String getName() {
-        if(this.getSide() == 0){
+        if(getSide() == 1){
             return "WK";
         } else {
             return "BK";
