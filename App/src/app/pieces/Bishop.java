@@ -17,7 +17,12 @@ public class Bishop extends Piece {
         int changeInX = finalX - initialX;
         int changeInY = finalY - initialY;
 
-        if(start.getSide() != end.getSide() && changeInX == changeInY){
+        if(start.getSide() != end.getSide() && changeInX == changeInY && changeInX * changeInY != 0){
+            for(int i = 1; i < changeInX; i++){
+                if(board[(changeInX + (changeInX/changeInX)) + i][(changeInY + (changeInY/changeInY)) + i].isOccupied()) {
+                    return false;
+                }
+            }
             return true;
         }
 

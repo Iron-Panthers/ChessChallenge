@@ -1,6 +1,7 @@
 package app.board;
 
-import app.pieces.Piece;
+import app.pieces.*;
+import app.player.*;
 
 public class Square{
     private int x, y;
@@ -14,6 +15,7 @@ public class Square{
         side = piece.getSide();
     }
 
+    //getter methods
     public int getSide(){
         return side;
     }
@@ -35,6 +37,17 @@ public class Square{
             return false;
         } else {
             return true;
+        }
+    }
+
+    //setter methods
+    public void setPiece(Piece piece){
+        this.piece = piece;
+    }
+
+    public void move(Player player, Square start, Square end){
+        if(player.getPlayerSide() == start.getSide()){
+            end.setPiece(start.getPiece());
         }
     }
 }

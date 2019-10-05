@@ -94,24 +94,43 @@ public class Board{
     }
 
     public void drawBoard(Square[][] board){
+        char[] letterSet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+        int[] numberSet = {1, 2, 3, 4, 5, 6, 7, 8};
         System.out.println();
-        for(int i = 0; i < 8; i++)
-            System.out.print("_____");
 
-        for(int row = 0; row < board.length; row++){
-            System.out.println();
-            System.out.print("| ");
-            for(int col = 0; col < board[0].length; col++){
-                System.out.print(board[row][col].getPiece().getName() + " | ");
-            }
+        System.out.print("  ");
+        for(int i = 0; i < letterSet.length; i++){
+            System.out.print(letterSet[i] + "    ");
         }
 
-        System.out.println();
-        System.out.print("-");
-        for(int i = 0; i < 8; i++)
-            System.out.print("_____");
-        System.out.println();
+        for(int row = 0; row < board.length; row++){
+                System.out.println();
+                System.out.print(numberSet[row]);
+                for(int col = 0; col < board[0].length; col++){
+                    System.out.print("[" + board[row][col].getPiece().getName() + "] ");
+                }
+            }
+
+            System.out.println();
+
+        // System.out.println();
+        // for(int i = 0; i < 8; i++)
+        //     System.out.print("_____");
+
+        // for(int row = 0; row < board.length; row++){
+        //     System.out.println();
+        //     System.out.print("| ");
+        //     for(int col = 0; col < board[0].length; col++){
+        //         System.out.print(board[row][col].getPiece().getName() + " | ");
+        //     }
+        // }
+
+        // System.out.println();
+        // System.out.print("-");
+        // for(int i = 0; i < 8; i++)
+        //     System.out.print("_____");
+        // System.out.println();
         
-    }
+    } 
 }
 
