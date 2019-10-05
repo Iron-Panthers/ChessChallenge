@@ -26,7 +26,10 @@ public class Pawn extends Piece {
             //handles black pawn moving from home row
             } else if((start.getSide() == 0) && (end.getY() - start.getY() == 2) && (changeInX == 0) && (start.getY() == 1) && (changeInY == 2)){
                 return true; 
-            } 
+                //handles normal moves
+            } else if(changeInY == 1 && changeInY == 0){
+                return true;
+            }
         //handles pawn killing a piece
         } else if(end.isOccupied()){
             if((Math.abs(changeInX) == 1) && (changeInY == 1)){

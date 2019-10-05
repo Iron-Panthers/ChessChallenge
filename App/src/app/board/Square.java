@@ -48,7 +48,13 @@ public class Square{
     public void move(Player player, Square start, Square end){
         if(player.getPlayerSide() == start.getSide()){
             end.setPiece(start.getPiece());
+            start.killPiece(start);
         }
+    }
+
+    public void killPiece(Square square){
+        Piece blank = new Blank(-1);
+        square.setPiece(blank);
     }
 }
 
