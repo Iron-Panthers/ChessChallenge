@@ -51,10 +51,8 @@ public class Square{
             end.setPiece(start.getPiece());
             start.killPiece(start);
         }
-
-        
     }
-
+    
     public void killPiece(Square square){
         Piece blank = new Blank(-1);
         square.setPiece(blank);

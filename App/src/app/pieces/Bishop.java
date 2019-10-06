@@ -1,6 +1,7 @@
 package app.pieces;
 
-import app.board.Square;
+import app.board.*;
+
 
 public class Bishop extends Piece {
 

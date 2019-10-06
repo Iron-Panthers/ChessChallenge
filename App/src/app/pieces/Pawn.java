@@ -10,34 +10,65 @@ public class Pawn extends Piece {
 
     @Override
     public boolean isValidMove(Square[][] board, Square start, Square end) {
-        int initialX = start.getX();
-        int initialY = start.getY();
-        int finalX = end.getX();
-        int finalY = end.getY();
-        int changeInX = finalX - initialX;
-        int changeInY = finalY - initialY;
+        int r1 = start.getX();
+        int c1 = start.getY();
+        int r2 = end.getX();
+        int c2 = end.getY();
+        int rChange = r2 - r1;
+        int cChange = c2 - c1;
 
-        if(start.getSide() == end.getSide()){
-            return false;
-        } else if (!end.isOccupied()){
-            //handles white pawn moving from home row
-            if((start.getSide() == 1) && (end.getY() - start.getY() == -2) && (changeInX == 0) && (start.getY() == 6) && (changeInY == -2)){ 
+        // System.out.println("r1 is " + r1);
+        // System.out.println("c1 is " + c1);
+        // System.out.println("r2 is " + r2);
+        // System.out.println("c2 is " + c2);
+        // System.out.println("delta r is " + rChange);
+        // System.out.println("delta c is " + cChange);
+        
+        //handles normal moves that don't kill
+        if(cChange == 0 && !end.isOccupied() && Math.abs(rChange) == 1){
+            //handles white pawns moving "backwards"
+            if(start.getSide() == 1 && rChange == -1){
                 return true;
-            //handles black pawn moving from home row
-            } else if((start.getSide() == 0) && (end.getY() - start.getY() == 2) && (changeInX == 0) && (start.getY() == 1) && (changeInY == 2)){
-                return true; 
-                //handles normal moves
-            } else if(changeInY == 1 && changeInY == 0){
-                return true;
-            }
-        //handles pawn killing a piece
-        } else if(end.isOccupied()){
-            if((Math.abs(changeInX) == 1) && (changeInY == 1)){
-                end.getPiece().killPiece();
+            } //handles black pawn moving forward
+            else if(start.getSide() == 0 && rChange == 1){
                 return true;
             }
+        } //handles moves that kill
+        else if(Math.abs(rChange) == 1 && Math.abs(cChange) == 1 && end.isOccupied()){
+            //white killing another
+            if(start.getSide() == 1 && cChange == -1){
+                return true;
+                //black killing another
+            } else if(start.getSide() == 0 && cChange == 1){
+                return true;
+            }
+
+        } else if((r1 == 6 && rChange == -2) || (r1 == 1 && rChange == 2)){
+            return true;
         }
         return false;
+
+    //     if(start.getSide() == end.getSide()){
+    //         return false;
+    //     } else if (!end.isOccupied()){
+    //         //handles white pawn moving from home row
+    //         if((start.getSide() == 1) && (end.getY() - start.getY() == -2) && (changeInX == 0) && (start.getY() == 6) && (changeInY == -2)){ 
+    //             return true;
+    //         //handles black pawn moving from home row
+    //         } else if((start.getSide() == 0) && (end.getY() - start.getY() == 2) && (changeInX == 0) && (start.getY() == 1) && (changeInY == 2)){
+    //             return true; 
+    //             //handles normal moves
+    //         } else if(changeInY == 1 && changeInY == 0){
+    //             return true;
+    //         }
+    //     //handles pawn killing a piece
+    //     } else if(end.isOccupied()){
+    //         if((Math.abs(changeInX) == 1) && (changeInY == 1)){
+    //             end.getPiece().killPiece();
+    //             return true;
+    //         }
+    //     }
+    //     return false;
     }
 
     @Override

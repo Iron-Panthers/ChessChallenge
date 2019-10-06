@@ -16,6 +16,12 @@ public class Rook extends Piece {
         int finalY = end.getY();
         int changeInX = finalX - initialX;
         int changeInY = finalY - initialY;
+
+        //e2 -- e4
+        /*
+        
+        
+        */
         
         if(end.getSide() != this.getSide()){
             if(changeInX == 0 && changeInY != 0){
