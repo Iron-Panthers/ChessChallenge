@@ -28,19 +28,36 @@ public class App {
         System.out.print(c);
         System.out.println();
 
-       
-        System.out.println("starting piece is "  + board[move[0]][move[1]].getPiece().getName());
-        System.out.println("ending piece is " + board[move[2]][move[3]].getPiece().getName());
+        //simplifies things
+        int r1 = move[0]; 
+        int r2 = move[2]; 
+        int c1 = move[1]; 
+        int c2 = move[3]; 
 
-    }
+       //input -> piece test
+        System.out.println("starting piece is "  + board[r1][c1].getPiece().getName());
+        System.out.println("ending piece is " + board[r2][c2].getPiece().getName());
 
-    public static void move(Player player, Square start, Square end){
-        if(player.getPlayerSide() == start.getSide()){
-            end.setPiece(start.getPiece());
-            start.killPiece(start);
-        }
+        System.out.println(board[r1][c1]);
+        System.out.println("The move is valid: " + board[r1][c1].getPiece().isValidMove(board, board[r1][c1], board[r2][c2]));
+
+        move(currentPlayer, board, move);
 
         
+    }
+
+    public static void move(Player player, Square[][] board, int[] move){
+        int r1 = move[0];
+        int r2 = move[2];
+        int c1 = move[1];
+        int c2 = move[3];
+        Board b = new Board();
+
+        board[r2][c2].setPiece(board[r1][c2].getPiece());
+        board[r1][c1].setPiece(new Blank(-1));
+        b.drawBoard(board);
+        player.setToGone();
+
     }
 
     public static void killPiece(Square square){

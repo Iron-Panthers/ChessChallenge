@@ -9,6 +9,10 @@ public class Board{
         this.initializeBoard(board);
     }
 
+    public Board(){
+        
+    }
+
     public void initializeBoard(Square[][] board){
         //black home row
         board[0][0] = new Square(0, 0, new Rook(0));
