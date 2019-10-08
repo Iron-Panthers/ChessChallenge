@@ -1,6 +1,7 @@
 package app.pieces;
 
-import app.board.Square;
+import app.board.*;
+import app.player.*;
 
 public class Blank extends Piece {
 
@@ -9,7 +10,7 @@ public class Blank extends Piece {
     }
 
     @Override
-    public boolean isValidMove(Square[][] board, Square start, Square end) {
+    public boolean isValidMove(Player player, Square[][] board, Square start, Square end) {
         return false;
     }
 

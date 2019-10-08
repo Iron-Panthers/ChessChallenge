@@ -1,6 +1,7 @@
 package app.pieces;
 
 import app.board.*;
+import app.player.*;
 
 
 public class Bishop extends Piece {
@@ -10,17 +11,18 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public boolean isValidMove(Square[][] board, Square start, Square end) {
-        int initialX = start.getX();
-        int initialY = start.getY();
-        int finalX = end.getX();
-        int finalY = end.getY();
-        int changeInX = finalX - initialX;
-        int changeInY = finalY - initialY;
+    public boolean isValidMove(Player player, Square[][] board, Square start, Square end) {
+        int r1 = start.getX(); 
+        int c1 = start.getY();
+        int r2 = end.getX();
+        int c2 = end.getY();
+        int rChange = r2 - r1;
+        int cChange = c2 - c1;
 
-        if(start.getSide() != end.getSide() && changeInX == changeInY && changeInX * changeInY != 0){
-            for(int i = 1; i < changeInX - 1; i++){
-                if(board[(changeInX + (changeInX/changeInX)) + i][(changeInY + (changeInY/changeInY)) + i].isOccupied()) {
+        if(start.getSide() != end.getSide() && rChange == cChange && rChange * cChange != 0){
+            for(int i = 1; i < Math.abs(rChange); i++){
+                // System.out.println("piece being checked is " + board[r1 + (i*(rChange/Math.abs(rChange)))][c1 + i * (cChange/Math.abs(cChange))].getPiece().getName());
+                if(board[r1 + (i*(rChange/Math.abs(rChange)))][c1 + i * (cChange/Math.abs(cChange))].isOccupied()){
                     return false;
                 }
             }
