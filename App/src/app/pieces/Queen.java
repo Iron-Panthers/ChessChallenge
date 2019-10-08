@@ -1,6 +1,7 @@
 package app.pieces;
 
 import app.board.Square;
+import app.player.Player;
 
 public class Queen extends Piece {
 
@@ -9,31 +10,22 @@ public class Queen extends Piece {
     }
 
     @Override
-    public boolean isValidMove(Square[][] board, Square start, Square end) {
-        int initialX = start.getX();
-        int initialY = start.getY();
-        int finalX = end.getX();
-        int finalY = end.getY();
-        int changeInX = finalX - initialX;
-        int changeInY = finalY - initialY;
-        
-        if(start.getSide() != end.getSide()){
-            if((changeInX == 0) && (changeInY != 0) || ((changeInX == 0) && (changeInY != 0))){
-                return true;
-            } else if(changeInX == changeInY){
-                return true;
-            } else {
-                return false;
-            }
-        } else{
-            return false;
+    public boolean isValidMove(Player player, Square[][] board, Square start, Square end) {
+        Rook rookCheck = new Rook(start.getSide());
+        Bishop bishopCheck = new Bishop(start.getSide());
+
+        //queen move can only be valid rook or bishop move -> no castling
+        if(rookCheck.isValidMove(player, board, start, end) || bishopCheck.isValidMove(player, board, start, end)){
+            return true;
         }
+
+        return false;
     }
 
     @Override
     public String getName() {
         if(getSide() == 1){
-            return "WQ";
+            return "WQlol";
         } else {
             return "BQ";
         }

@@ -8,44 +8,61 @@ import app.player.*;
 
 public class App {
     public static void main(String[] args) {
-        //initializing players
-        Player player1 = new Player(0);
-        Player player2 = new Player(2);
+        //initializations
+        Scanner scan = new Scanner(System.in);
+        Player player1 = new Player(1);
+        Player player2 = new Player(0);
         Player currentPlayer = player1;
+        String input;
+        int[] move;
 
         //handle opening board
         Square[][] board = new Square[8][8];
         Board Board = new Board(board);
         Board.initializeBoard(board);
         Board.drawBoard(board);
-        String input = getValidUserInput(currentPlayer);
-        System.out.println(currentPlayer.getName()  + " said " + input);
-        int[] move = convertInput(input); //converted input
 
-        //input converter test
-        System.out.print("Converted input is: ");
-        for(int c : move)
-        System.out.print(c);
-        System.out.println();
-
-        //simplifies things
-        int r1 = move[0]; 
-        int r2 = move[2]; 
-        int c1 = move[1]; 
-        int c2 = move[3]; 
-
-       //input -> piece test
-        System.out.println("starting piece is "  + board[r1][c1].getPiece().getName());
-        System.out.println("ending piece is " + board[r2][c2].getPiece().getName());
-
-        System.out.println(board[r1][c1]);
-        System.out.println("The move is valid: " + board[r1][c1].getPiece().isValidMove(board, board[r1][c1], board[r2][c2]));
-
-        move(currentPlayer, board, move);
-
-        
+        for(int i = 0; i < 4; i++){
+            input = getValidUserInput(board, currentPlayer, scan);
+            System.out.println(currentPlayer.getName()  + " said " + input);
+            move = convertInput(input); //converted input
+            move(currentPlayer, board, move);
+          
+            System.out.println(currentPlayer.getName() + " has gone: " + currentPlayer.hasGone(currentPlayer));
+            if(currentPlayer.getPlayerSide() == 1){
+                currentPlayer = player2;
+            } else if(currentPlayer.getPlayerSide() == 0){
+                currentPlayer = player1;
+            }
+        }
     }
 
+    public static String getValidUserInput(Square[][] board, Player currentPlayer, Scanner scan){
+        boolean current = false;   
+        String input;
+
+        while(!current){
+            System.out.print(currentPlayer.getName() + ", please enter your move: ");
+            input = scan.nextLine();
+            current = isValidInput(input);
+            if(current){
+                int[] move = convertInput(input);
+                int r1 = move[0]; 
+                int r2 = move[2]; 
+                int c1 = move[1]; 
+                int c2 = move[3]; 
+                if(board[r1][c1].getPiece().isValidMove(currentPlayer, board, board[r1][c1], board[r2][c2])){
+                    return input;
+                } else {
+                    current = false;
+                }
+            }
+            System.out.println("Invalid input. Please input a valid move.");
+        }
+
+        return "Error message";
+    }
+   
     public static void move(Player player, Square[][] board, int[] move){
         int r1 = move[0];
         int r2 = move[2];
@@ -53,16 +70,12 @@ public class App {
         int c2 = move[3];
         Board b = new Board();
 
-        board[r2][c2].setPiece(board[r1][c2].getPiece());
-        board[r1][c1].setPiece(new Blank(-1));
+        board[r2][c2].setSide(board[r1][c1].getSide());
+        board[r2][c2].setPiece(board[r1][c1].getPiece());
+        killPiece(board[r1][c1]);
         b.drawBoard(board);
         player.setToGone();
 
-    }
-
-    public static void killPiece(Square square){
-        Piece blank = new Blank(-1);
-        square.setPiece(blank);
     }
 
     public static int[] convertInput(String input){
@@ -107,25 +120,6 @@ public class App {
         return finalInputArray;
     }
 
-    public static String getValidUserInput(Player currentPlayer){
-        Scanner scan = new Scanner(System.in);
-        boolean current = false;   
-
-        while(!current){
-            System.out.println(currentPlayer.getName() + ", please enter your move: ");
-            String input = scan.nextLine();
-            current = isValidInput(input);
-            if(current){
-                scan.close();
-               return input;
-            }
-            System.out.println("Invalid move. Please enter a valid move.");
-        }
-
-        scan.close();
-        return "Error message";
-    }
-
     public static boolean isValidInput(String input){
         char[] letterSet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
         char[] numberSet = {'1', '2', '3', '4', '5', '6', '7', '8'};
@@ -165,7 +159,10 @@ public class App {
                 return false;
             }
         }
-        
         return true;
     }      
+
+    public static void killPiece(Square square){
+        square.setPiece(new Blank(-1));
+    }
 }

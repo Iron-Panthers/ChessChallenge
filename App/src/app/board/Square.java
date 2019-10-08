@@ -12,7 +12,7 @@ public class Square{
         this.x = x;
         this.y = y;
         this.piece = piece;
-        side = piece.getSide();
+        this.side = piece.getSide();
     }
 
     //getter methods
@@ -56,6 +56,10 @@ public class Square{
     public void killPiece(Square square){
         Piece blank = new Blank(-1);
         square.setPiece(blank);
+    }
+
+    public void setSide(int side){
+        this.side = side;
     }
 }
 

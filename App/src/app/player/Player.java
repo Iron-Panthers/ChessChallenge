@@ -14,7 +14,7 @@ public class Player{
     }
 
     public String getName(){
-        if(side == 0){
+        if(side == 1){
             return "Player 1";
         }
         return "Player 2";

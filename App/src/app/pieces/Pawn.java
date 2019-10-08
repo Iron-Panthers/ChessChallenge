@@ -1,6 +1,7 @@
 package app.pieces;
 
 import app.board.*;
+import app.player.*;
 
 public class Pawn extends Piece {
     
@@ -9,7 +10,7 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public boolean isValidMove(Square[][] board, Square start, Square end) {
+    public boolean isValidMove(Player player, Square[][] board, Square start, Square end) {
         int r1 = start.getX();
         int c1 = start.getY();
         int r2 = end.getX();
@@ -17,12 +18,17 @@ public class Pawn extends Piece {
         int rChange = r2 - r1;
         int cChange = c2 - c1;
 
-        // System.out.println("r1 is " + r1);
-        // System.out.println("c1 is " + c1);
-        // System.out.println("r2 is " + r2);
-        // System.out.println("c2 is " + c2);
-        // System.out.println("delta r is " + rChange);
-        // System.out.println("delta c is " + cChange);
+        System.out.println("r1 is " + r1);
+        System.out.println("c1 is " + c1);
+        System.out.println("r2 is " + r2);
+        System.out.println("c2 is " + c2);
+        System.out.println("delta r is " + rChange);
+        System.out.println("delta c is " + cChange);
+        System.out.println("the end is occupied: " + end.isOccupied());
+
+        if(player.getPlayerSide() != start.getSide()){
+            return false;
+        }
         
         //handles normal moves that don't kill
         if(cChange == 0 && !end.isOccupied() && Math.abs(rChange) == 1){
@@ -35,17 +41,12 @@ public class Pawn extends Piece {
             }
         } //handles moves that kill
         else if(Math.abs(rChange) == 1 && Math.abs(cChange) == 1 && end.isOccupied()){
-            //white killing another
-            if(start.getSide() == 1 && cChange == -1){
+            if(start.getSide() == 1 && end.getSide() == 0 && rChange == -1){
                 return true;
-                //black killing another
-            } else if(start.getSide() == 0 && cChange == 1){
+            } else if(start.getSide() == 0 && end.getSide() == 1 && rChange == 1){
                 return true;
             }
-
-        } else if((r1 == 6 && rChange == -2) || (r1 == 1 && rChange == 2)){
-            return true;
-        }
+        } 
         return false;
 
     //     if(start.getSide() == end.getSide()){
