@@ -15,19 +15,23 @@ public class App {
         Player currentPlayer = player1;
         String input;
         int[] move;
-
+        boolean isGameOver = false;
+        
         //handle opening board
         Square[][] board = new Square[8][8];
-        Board Board = new Board(board);
-        Board.initializeBoard(board);
-        Board.drawBoard(board);
+        Board b = new Board(board);
+        b.initializeBoard(board);
+        b.drawBoard(board);
 
-        for(int i = 0; i < 4; i++){
+        //ACTUAL GAME LOOP
+       for(int i = 0; i < 10; i++){
             input = getValidUserInput(board, currentPlayer, scan);
             System.out.println(currentPlayer.getName()  + " said " + input);
             move = convertInput(input); //converted input
             move(currentPlayer, board, move);
-          
+            b.drawBoard(board);
+            
+            //switch current player
             System.out.println(currentPlayer.getName() + " has gone: " + currentPlayer.hasGone(currentPlayer));
             if(currentPlayer.getPlayerSide() == 1){
                 currentPlayer = player2;
@@ -40,11 +44,12 @@ public class App {
     public static String getValidUserInput(Square[][] board, Player currentPlayer, Scanner scan){
         boolean current = false;   
         String input;
-
+    
         while(!current){
             System.out.print(currentPlayer.getName() + ", please enter your move: ");
             input = scan.nextLine();
             current = isValidInput(input);
+
             if(current){
                 int[] move = convertInput(input);
                 int r1 = move[0]; 
@@ -53,7 +58,8 @@ public class App {
                 int c2 = move[3]; 
                 if(board[r1][c1].getPiece().isValidMove(currentPlayer, board, board[r1][c1], board[r2][c2])){
                     return input;
-                } else {
+                } 
+                else {
                     current = false;
                 }
             }
@@ -68,14 +74,24 @@ public class App {
         int r2 = move[2];
         int c1 = move[1];
         int c2 = move[3];
-        Board b = new Board();
+        int cChange = c2 - c1;
+        King king = new King(board[r1][c1].getSide());
 
-        board[r2][c2].setSide(board[r1][c1].getSide());
-        board[r2][c2].setPiece(board[r1][c1].getPiece());
-        killPiece(board[r1][c1]);
-        b.drawBoard(board);
-        player.setToGone();
-
+        if(king.isCastlingMove(player, board, board[r1][c1], board[r2][c2])){
+            System.out.println("You have done a castling move");
+            board[r2][c2].setPiece(board[r1][c1].getPiece()); //moves king
+            int rookChange = -1 * (cChange/cChange * ((Math.abs(cChange) - 1)));
+            board[r1][c2 + rookChange].setPiece(new Rook(player.getPlayerSide()));
+            board[r1][c2 + rookChange].setSide(player.getPlayerSide());
+            killPiece(board[r1][c1]);
+            player.setToGone();
+            
+        } else {
+            board[r2][c2].setSide(board[r1][c1].getSide());
+            board[r2][c2].setPiece(board[r1][c1].getPiece());
+            killPiece(board[r1][c1]);
+            player.setToGone();
+        }
     }
 
     public static int[] convertInput(String input){
@@ -109,7 +125,6 @@ public class App {
             }
         }
 
-        //just making main easier to read
         int[] finalInputArray = new int[4];
         finalInputArray[0] = 7 - (inputArray[1]);
         finalInputArray[1] = inputArray[0];
@@ -163,6 +178,7 @@ public class App {
     }      
 
     public static void killPiece(Square square){
+        square.setSide(-1);
         square.setPiece(new Blank(-1));
     }
 }

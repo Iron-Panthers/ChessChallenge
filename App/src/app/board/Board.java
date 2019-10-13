@@ -30,8 +30,8 @@ public class Board{
         board[7][2] = new Square(7, 2, new Bishop(1));
         board[7][3] = new Square(7, 3, new Queen(1));
         board[7][4] = new Square(7, 4, new King(1));   
-        board[7][5] = new Square(7, 5, new Bishop(1));
-        board[7][6] = new Square(7, 6, new Knight(1)); 
+        board[7][5] = new Square(7, 5, new Blank(-1));
+        board[7][6] = new Square(7, 6, new Blank(-1)); 
         board[7][7] = new Square(7, 7, new Rook(1));
 
         //black pawns

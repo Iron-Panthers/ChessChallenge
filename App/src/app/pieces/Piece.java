@@ -7,7 +7,7 @@ public abstract class Piece{
     private int side;
     private boolean isDead;
 
-    Piece(int side){
+    public Piece(int side){
         this.side = side;
         this.isDead = false;
     }
