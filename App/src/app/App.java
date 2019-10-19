@@ -5,6 +5,7 @@ import app.board.*;
 import app.pieces.*;
 import java.util.Scanner;
 import app.player.*;
+import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
@@ -16,28 +17,37 @@ public class App {
         String input;
         int[] move;
         boolean isGameOver = false;
+        ArrayList<String> inputHistory = new ArrayList<String>();
         
         //handle opening board
         Square[][] board = new Square[8][8];
-        Board b = new Board(board);
-        b.initializeBoard(board);
-        b.drawBoard(board);
+        Board.initializeBoard(board);
+        Board.drawBoard(board);
 
         //ACTUAL GAME LOOP
-       for(int i = 0; i < 10; i++){
-            input = getValidUserInput(board, currentPlayer, scan);
+        for(int i = 0; i < 2 * 10; i++){
+            input = getValidUserInput(board, currentPlayer, scan); //loop for input
             System.out.println(currentPlayer.getName()  + " said " + input);
             move = convertInput(input); //converted input
             move(currentPlayer, board, move);
-            b.drawBoard(board);
+            Board.drawBoard(board);
+            inputHistory.add(input);
             
+            if(Piece.risksKing(board)){
+                System.out.println("THE KING IS AT RISK");
+            } else {
+                System.out.println("THE KING IS NOT AS RISK");
+            }
+
+
             //switch current player
-            System.out.println(currentPlayer.getName() + " has gone: " + currentPlayer.hasGone(currentPlayer));
+            System.out.println(currentPlayer.getName()  + " has gone");
             if(currentPlayer.getPlayerSide() == 1){
                 currentPlayer = player2;
             } else if(currentPlayer.getPlayerSide() == 0){
                 currentPlayer = player1;
             }
+            System.out.println(inputHistory);
         }
     }
 
@@ -121,7 +131,8 @@ public class App {
                 break;
                 case 'h': case '8':
                 inputArray[i] = 7;
-                break;
+				break;
+				
             }
         }
 

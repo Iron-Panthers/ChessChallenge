@@ -25,8 +25,42 @@ public abstract class Piece{
         this.isDead = true;
     }
     
+    public static boolean risksKing(Square[][] board){
+        //make sure neither white or black king are open
+        Player testPlayer1 = new Player(1);
+        Player testPlayer2 = new Player(0);
+        
+        if(Board.getWhiteKingSquare(board) == null){
+            
+        }
+        Square whiteKing = Board.getWhiteKingSquare(board);
+        Square blackKing = Board.getBlackKingSquare(board);
+
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[0].length; j++){
+               switch(board[i][j].getSide()){
+                   case 1: //white
+                   if(board[i][j].getPiece().isValidMove(testPlayer1, board, board[i][j], blackKing)){
+                    return true;
+                    } else { 
+                        break;
+                    }
+                    case 0: //black 
+                    if(board[i][j].getPiece().isValidMove(testPlayer2, board, board[i][j], whiteKing)){
+                        return true;
+                    } else {
+                        break;
+                    }
+                    case -1: default:
+                    break;
+               }
+            }
+        }
+
+        return false;
+    }
+    
     public abstract boolean isValidMove(Player player, Square[][] board, Square start, Square end);
     public abstract String getName();
-    
-    // public abstract boolean canReachSpot(Board board);
+
 }

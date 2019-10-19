@@ -27,4 +27,8 @@ public class Player{
     public void setToGone(){
         hasGone = true;
     }
+
+    public void setSide(int side){
+        this.side = side;
+    }
 }

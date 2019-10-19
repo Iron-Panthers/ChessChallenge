@@ -4,7 +4,6 @@ import app.board.*;
 import app.player.*;
 
 public class Rook extends Piece {
-
     public Rook(int side) {
         super(side);
     }

@@ -3,17 +3,40 @@ package app.board;
 import app.pieces.*;
 
 public class Board{
-    private Square[][] board = new Square[8][8];
-
     public Board(Square[][] board){
-        this.initializeBoard(board);
+        initializeBoard(board);
     }
 
     public Board(){
-        
     }
 
-    public void initializeBoard(Square[][] board){
+    public static Square getWhiteKingSquare(Square[][] board){
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[0].length; j++){
+                if(board[i][j].getPiece().getName() == "WK"){
+                    Square whiteKing = new Square(board[i][j].getX(), board[i][j].getY(), board[i][j].getPiece());
+                    return whiteKing;
+                }
+            }
+        }
+        
+        return null;
+    }
+
+    public static Square getBlackKingSquare(Square[][] board){
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[0].length; j++){
+                if(board[i][j].getPiece().getName() == "BK"){
+                    Square blackKing = new Square(board[i][j].getX(), board[i][j].getY(), board[i][j].getPiece());
+                    return blackKing;
+                }
+            }
+        }
+        
+        return null;
+    }
+
+    public static void initializeBoard(Square[][] board){
         //black home row
         board[0][0] = new Square(0, 0, new Rook(0));
         board[0][1] = new Square(0, 1, new Knight(0));
@@ -30,8 +53,8 @@ public class Board{
         board[7][2] = new Square(7, 2, new Bishop(1));
         board[7][3] = new Square(7, 3, new Queen(1));
         board[7][4] = new Square(7, 4, new King(1));   
-        board[7][5] = new Square(7, 5, new Blank(-1));
-        board[7][6] = new Square(7, 6, new Blank(-1)); 
+        board[7][5] = new Square(7, 5, new Bishop(1));
+        board[7][6] = new Square(7, 6, new Knight(1)); 
         board[7][7] = new Square(7, 7, new Rook(1));
 
         //black pawns
@@ -52,11 +75,7 @@ public class Board{
         }
     }
 
-    public Square[][] getBoard(){
-        return board;
-    }
-
-    public void drawBoard(Square[][] board){
+    public static void drawBoard(Square[][] board){
         char[] letterSet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
         int[] numberSet = {8, 7, 6, 5, 4, 3, 2, 1};
         System.out.println();
@@ -83,23 +102,7 @@ public class Board{
 
          System.out.println();
 
-        // System.out.println();
-        // for(int i = 0; i < 8; i++)
-        //     System.out.print("_____");
-
-        // for(int row = 0; row < board.length; row++){
-        //     System.out.println();
-        //     System.out.print("| ");
-        //     for(int col = 0; col < board[0].length; col++){
-        //         System.out.print(board[row][col].getPiece().getName() + " | ");
-        //     }
-        // }
-
-        // System.out.println();
-        // System.out.print("-");
-        // for(int i = 0; i < 8; i++)
-        //     System.out.print("_____");
-        // System.out.println();
-        
     }
+
+
 } 
