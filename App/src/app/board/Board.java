@@ -4,6 +4,7 @@ import app.pieces.*;
 
 public class Board{
     public Board(Square[][] board){
+<<<<<<< HEAD
         initializeBoard(board);
     }
 
@@ -37,6 +38,16 @@ public class Board{
     }
 
     public static void initializeBoard(Square[][] board){
+=======
+        this.initializeBoard(board);
+    }
+
+    public Board(){
+        
+    }
+
+    public void initializeBoard(Square[][] board){
+>>>>>>> master
         //black home row
         board[0][0] = new Square(0, 0, new Rook(0));
         board[0][1] = new Square(0, 1, new Knight(0));
@@ -53,8 +64,8 @@ public class Board{
         board[7][2] = new Square(7, 2, new Bishop(1));
         board[7][3] = new Square(7, 3, new Queen(1));
         board[7][4] = new Square(7, 4, new King(1));   
-        board[7][5] = new Square(7, 5, new Bishop(1));
-        board[7][6] = new Square(7, 6, new Knight(1)); 
+        board[7][5] = new Square(7, 5, new Blank(-1));
+        board[7][6] = new Square(7, 6, new Blank(-1)); 
         board[7][7] = new Square(7, 7, new Rook(1));
 
         //black pawns
@@ -73,6 +84,13 @@ public class Board{
                 board[i][j] = new Square(i, j, new Blank(-1));
             }
         }
+<<<<<<< HEAD
+=======
+    }
+
+    public Square[][] getBoard(){
+        return board;
+>>>>>>> master
     }
 
     public static void drawBoard(Square[][] board){
@@ -99,10 +117,35 @@ public class Board{
         for(int i = 0; i < letterSet.length; i++){
             System.out.print(letterSet[i] + "    ");
         }
+<<<<<<< HEAD
 
          System.out.println();
 
     }
 
 
+=======
+
+         System.out.println();
+
+        // System.out.println();
+        // for(int i = 0; i < 8; i++)
+        //     System.out.print("_____");
+
+        // for(int row = 0; row < board.length; row++){
+        //     System.out.println();
+        //     System.out.print("| ");
+        //     for(int col = 0; col < board[0].length; col++){
+        //         System.out.print(board[row][col].getPiece().getName() + " | ");
+        //     }
+        // }
+
+        // System.out.println();
+        // System.out.print("-");
+        // for(int i = 0; i < 8; i++)
+        //     System.out.print("_____");
+        // System.out.println();
+        
+    }
+>>>>>>> master
 } 

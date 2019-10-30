@@ -25,6 +25,7 @@ public abstract class Piece{
         this.isDead = true;
     }
     
+<<<<<<< HEAD
     public static boolean risksKing(Square[][] board){
         //make sure neither white or black king are open
         Player testPlayer1 = new Player(1);
@@ -63,4 +64,10 @@ public abstract class Piece{
     public abstract boolean isValidMove(Player player, Square[][] board, Square start, Square end);
     public abstract String getName();
 
+=======
+    public abstract boolean isValidMove(Player player, Square[][] board, Square start, Square end);
+    public abstract String getName();
+    
+    // public abstract boolean canReachSpot(Board board);
+>>>>>>> master
 }

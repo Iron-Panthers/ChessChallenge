@@ -27,8 +27,11 @@ public class Player{
     public void setToGone(){
         hasGone = true;
     }
+<<<<<<< HEAD
 
     public void setSide(int side){
         this.side = side;
     }
+=======
+>>>>>>> master
 }

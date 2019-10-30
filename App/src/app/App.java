@@ -17,6 +17,7 @@ public class App {
         String input;
         int[] move;
         boolean isGameOver = false;
+<<<<<<< HEAD
         ArrayList<String> inputHistory = new ArrayList<String>();
         
         //handle opening board
@@ -76,6 +77,58 @@ public class App {
             System.out.println("Invalid input. Please input a valid move.");
         }
 
+=======
+        
+        //handle opening board
+        Square[][] board = new Square[8][8];
+        Board b = new Board(board);
+        b.initializeBoard(board);
+        b.drawBoard(board);
+
+        //ACTUAL GAME LOOP
+       for(int i = 0; i < 10; i++){
+            input = getValidUserInput(board, currentPlayer, scan);
+            System.out.println(currentPlayer.getName()  + " said " + input);
+            move = convertInput(input); //converted input
+            move(currentPlayer, board, move);
+            b.drawBoard(board);
+            
+            //switch current player
+            System.out.println(currentPlayer.getName() + " has gone: " + currentPlayer.hasGone(currentPlayer));
+            if(currentPlayer.getPlayerSide() == 1){
+                currentPlayer = player2;
+            } else if(currentPlayer.getPlayerSide() == 0){
+                currentPlayer = player1;
+            }
+        }
+    }
+
+    public static String getValidUserInput(Square[][] board, Player currentPlayer, Scanner scan){
+        boolean current = false;   
+        String input;
+    
+        while(!current){
+            System.out.print(currentPlayer.getName() + ", please enter your move: ");
+            input = scan.nextLine();
+            current = isValidInput(input);
+
+            if(current){
+                int[] move = convertInput(input);
+                int r1 = move[0]; 
+                int r2 = move[2]; 
+                int c1 = move[1]; 
+                int c2 = move[3]; 
+                if(board[r1][c1].getPiece().isValidMove(currentPlayer, board, board[r1][c1], board[r2][c2])){
+                    return input;
+                } 
+                else {
+                    current = false;
+                }
+            }
+            System.out.println("Invalid input. Please input a valid move.");
+        }
+
+>>>>>>> master
         return "Error message";
     }
    

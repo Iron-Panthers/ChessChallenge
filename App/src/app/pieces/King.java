@@ -20,6 +20,7 @@ public class King extends Piece {
         int rChange = r2 - r1;
         int cChange = c2 - c1;
 
+<<<<<<< HEAD
         // System.out.println("r1 is " + r1);
         // System.out.println("c1 is " + c1);
         // System.out.println("r2 is " + r2);
@@ -28,6 +29,16 @@ public class King extends Piece {
         // System.out.println("cChange is " + cChange);
         // System.out.println("starting side is " + start.getSide());
         // System.out.println("ending side is " + end.getSide());
+=======
+        System.out.println("r1 is " + r1);
+        System.out.println("c1 is " + c1);
+        System.out.println("r2 is " + r2);
+        System.out.println("c2 is " + c2);
+        System.out.println("rChange is " + rChange);
+        System.out.println("cChange is " + cChange);
+        System.out.println("starting side is " + start.getSide());
+        System.out.println("ending side is " + end.getSide());
+>>>>>>> master
 
         if(start.getSide() != end.getSide()){
             switch(Math.abs(rChange)){
